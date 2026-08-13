@@ -25,17 +25,8 @@ Payload for bootloader (lk) modification for Moto G24 Power (fogorow)
     ```
 2. Run build
     ```shell
-    cd payload; make; cd ..
+    make clean; make
     ```
-
-## Using
-```shell
-python3 scripts/patch_lk.py <YOUR LK> <PAYLOAD>
-```
-### Example:
-```shell
-python3 scripts/patch_lk.py bin/UTAS34.82-126.img payload/build/payload.bin
-```
 
 # Credits
 
