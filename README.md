@@ -29,5 +29,5 @@ Payload for bootloader (lk) modification for Moto G24 Power (fogorow)
     ```
 
 # Credits
-
-# Victor Vasquez (Zangetsu) and Roger Ortiz (ChouChou)
+ 
+## Roger Ortiz (ChouChou)
