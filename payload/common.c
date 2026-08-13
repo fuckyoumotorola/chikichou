@@ -62,7 +62,7 @@ void early_init() {
   x[1] = 0x4770;
   arch_clean_invalidate_cache_range((uint32_t)0x4c437898, 2);
 
-  x = (volatile uint16_t *)0x4c435b9c;
+  x = (volatile uint16_t *)0x4c435b9c; // hides video variables: ro.efuse, etc
   x[0] = 0x2000;
   x[1] = 0x4770;
   arch_clean_invalidate_cache_range((uint32_t)0x4c435b9c, 2);
