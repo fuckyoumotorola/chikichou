@@ -1,4 +1,4 @@
-# Chikichou
+# ChikiChou
 Payload for bootloader (lk) modification for Moto G24 Power (fogorow)
 
 ## Features
