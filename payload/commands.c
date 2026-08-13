@@ -111,14 +111,13 @@ void cmd_erase(const char *arg, void *data, unsigned sz) {
 }
 
 void cmd_flashing_unlock(const char *arg, void *data, unsigned sz) {
-  fastboot_fail("This command has been disabled for security reasons");
+  fastboot_info("This command has been disabled for security reasons");
+  fastboot_fail("");
 }
 
 void cmd_flashing_lock(const char *arg, void *data, unsigned sz) {
-  fastboot_info("");
   fastboot_info("To lock the bootloader, you need to flash");
   fastboot_info("stock firmare first");
-  fastboot_info("");
   fastboot_fail("");
 }
 
