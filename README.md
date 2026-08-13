@@ -1,5 +1,5 @@
 # ChikiChou
-Payload for bootloader (lk) modification for Moto G24 Power (fogorow)
+Minimal payload for bootloader (lk) modification for Moto G24 Power (fogorow)
 
 ## Features
 - Blocks ```fastboot flash preloader```
@@ -10,7 +10,7 @@ Payload for bootloader (lk) modification for Moto G24 Power (fogorow)
 - Adds ```fastboot oem is-partition-protected```
 - Adds ```fastboot oem ssm-enable-thinkshield```
 - Adds ```fastboot oem ssm-enable-zerotouch```
-- Adds ```fastboot oem download```
+- Adds alias ```fastboot oem download``` for ```fastboot download```
 - Patches ```fastboot oem ssm-disable-thinkshield```
 - Patches ```fastboot oem ssm-disable-zerotouch```
 - Publishes ```membase```
@@ -21,22 +21,13 @@ Payload for bootloader (lk) modification for Moto G24 Power (fogorow)
 ### Arch Linux
 1. Install dependencies
     ```shell
-    sudo pacman -S arm-none-eabi-newlib arm-none-eabi-gcc
+    sudo pacman -S base-devel arm-none-eabi-gcc arm-none-eabi-newlib
     ```
 2. Run build
     ```shell
-    cd payload; make; cd ..
+    make clean; make
     ```
 
-## Using
-```shell
-python3 scripts/patch_lk.py <YOUR LK> <PAYLOAD>
-```
-### Example:
-```shell
-python3 scripts/patch_lk.py bin/UTAS34.82-126.img payload/build/payload.bin
-```
-
 # Credits
-
-# Victor Vasquez (Zangetsu) and Roger Ortiz (ChouChou)
+ 
+## Roger Ortiz (ChouChou)
