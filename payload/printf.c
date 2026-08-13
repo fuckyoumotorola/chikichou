@@ -3,14 +3,13 @@
 #include <stdarg.h>
 
 void low_uart_put(int ch) {
-    // The SoC sets 0x20 when UART isn't busy
     while (!(*(volatile uint32_t*)UART_REG0 & 0x20));
     *(volatile uint32_t*)UART_REG1 = ch;
 }
 
 typedef struct uidiv_result {
-    uint32_t quo;  /// < Quotient
-    uint32_t rem;  /// < Remainder
+    uint32_t quo;  
+    uint32_t rem;
 } uidiv_result_t;
 
 uidiv_result_t uidiv(uint32_t num, uint32_t dem) {
