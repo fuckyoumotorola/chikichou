@@ -21,7 +21,7 @@ Payload for bootloader (lk) modification for Moto G24 Power (fogorow)
 ### Arch Linux
 1. Install dependencies
     ```shell
-    sudo pacman -S arm-none-eabi-newlib arm-none-eabi-gcc
+    sudo pacman -S base-devel arm-none-eabi-gcc arm-none-eabi-newlib
     ```
 2. Run build
     ```shell
