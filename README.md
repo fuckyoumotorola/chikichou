@@ -1,5 +1,5 @@
 # ChikiChou
-Payload for bootloader (lk) modification for Moto G24 Power (fogorow)
+Minimal payload for bootloader (lk) modification for Moto G24 Power (fogorow)
 
 ## Features
 - Blocks ```fastboot flash preloader```
