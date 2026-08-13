@@ -10,7 +10,7 @@ Minimal payload for bootloader (lk) modification for Moto G24 Power (fogorow)
 - Adds ```fastboot oem is-partition-protected```
 - Adds ```fastboot oem ssm-enable-thinkshield```
 - Adds ```fastboot oem ssm-enable-zerotouch```
-- Adds ```fastboot oem download```
+- Adds ```fastboot oem download``` alias for ```fastboot download```
 - Patches ```fastboot oem ssm-disable-thinkshield```
 - Patches ```fastboot oem ssm-disable-zerotouch```
 - Publishes ```membase```
