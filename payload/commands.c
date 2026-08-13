@@ -141,14 +141,16 @@ void cmd_ssm_enable_zerotouch(const char *arg, void *data, unsigned sz) {
 
 void cmd_is_partition_protected(const char *arg, void *data, unsigned sz) {
   if (!arg || !*arg) {
-    fastboot_fail("Missing partition name");
+    fastboot_info("Missing partition name");
+    fastboot_fail("");
     return;
   }
 
   while (*arg == ' ')
     arg++;
   if (!*arg) {
-    fastboot_fail("Missing partition name");
+    fastboot_info("Missing partition name");
+    fastboot_fail("");
     return;
   }
 
@@ -156,15 +158,19 @@ void cmd_is_partition_protected(const char *arg, void *data, unsigned sz) {
   while (*p && *p != ' ')
     p++;
   if (*p) {
-    fastboot_fail("Invalid partition name");
+    fastboot_info("Invalid partition name");
+    fastboot_fail("");
     return;
   }
 
   if (fastboot_is_protected_partition(arg)) {
     fastboot_info("Partition is protected");
+    fastboot_okay("");
     return;
   };
+
   fastboot_info("Partition is not protected");
+  fastboot_okay("");
 }
 
 void register_commands() {
@@ -172,12 +178,14 @@ void register_commands() {
   fastboot_publish("chokichou-version", VERSION);
 
   fastboot_register("oem help", cmd_help, 1);
-  fastboot_register("oem ssm enable-thinkshield", cmd_ssm_enable_thinkshield, 1);
+  fastboot_register("oem ssm enable-thinkshield", cmd_ssm_enable_thinkshield,
+                    1);
   fastboot_register("oem ssm enable-zerotouch", cmd_ssm_enable_zerotouch, 1);
   fastboot_register("flash:", cmd_flash, 1);
   fastboot_register("erase:", cmd_erase, 1);
   fastboot_register("flashing lock", cmd_flashing_lock, 1);
   fastboot_register("flashing unlock", cmd_flashing_unlock, 1);
   fastboot_register("oem download", cmd_download, 1);
-  fastboot_register("oem is-partition-protected", cmd_is_partition_protected, 1);
+  fastboot_register("oem is-partition-protected", cmd_is_partition_protected,
+                    1);
 }
