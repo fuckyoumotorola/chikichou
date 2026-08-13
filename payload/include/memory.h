@@ -1,4 +1,5 @@
 #pragma once
+#include <stddef.h>
 
 #define FIND_PATTERN(start, end, pattern)                                                   \
     ({                                                                                      \

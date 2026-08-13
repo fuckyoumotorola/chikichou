@@ -1,4 +1,3 @@
-#include <stddef.h>
 #include "include/memory.h"
 
 typedef size_t word;
