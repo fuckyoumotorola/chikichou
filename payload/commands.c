@@ -1,8 +1,6 @@
 #include "include/commands.h"
-#include "include/arm.h"
 #include "include/common.h"
 #include "include/fastboot.h"
-#include "include/string.h"
 
 void original_flash(const char *arg, void *data, unsigned sz) {
   ((void (*)(const char *arg, void *data, unsigned sz))(0x4c439728 | 1))(
@@ -142,44 +140,40 @@ void cmd_ssm_enable_zerotouch(const char *arg, void *data, unsigned sz) {
   fastboot_okay("");
 }
 
-void cmd_is_partition_protected(const char* arg, void* data, unsigned sz) {
-    if (!arg || !*arg) {
-        fastboot_fail("Missing partition name");
-        return;
-    }
+void cmd_is_partition_protected(const char *arg, void *data, unsigned sz) {
+  if (!arg || !*arg) {
+    fastboot_fail("Missing partition name");
+    return;
+  }
 
-    while (*arg == ' ') arg++;
-    if (!*arg) {
-        fastboot_fail("Missing partition name");
-        return;
-    }
+  while (*arg == ' ')
+    arg++;
+  if (!*arg) {
+    fastboot_fail("Missing partition name");
+    return;
+  }
 
-    const char* p = arg;
-    while (*p && *p != ' ') p++;
-    if (*p) {
-        fastboot_fail("Invalid partition name");
-        return;
-    }
+  const char *p = arg;
+  while (*p && *p != ' ')
+    p++;
+  if (*p) {
+    fastboot_fail("Invalid partition name");
+    return;
+  }
 
-    if (fastboot_is_protected_partition(arg))
-        fastboot_info("Partition is protected");
-    else
-        fastboot_info("Partition is not protected");
-
-    fastboot_okay("");
+  if (fastboot_is_protected_partition(arg)) {
+    fastboot_info("Partition is protected");
+    return;
+  };
+  fastboot_info("Partition is not protected");
 }
 
 void register_commands() {
-  uint32_t vbar = READ_VBAR() & ~0xFFF;
-  static char membase_str[11];
-  int_to_hex_str(vbar, membase_str);
-
-  fastboot_publish("membase", membase_str);
+  fastboot_publish("membase", "0x4C400000");
   fastboot_publish("chokichou-version", VERSION);
 
   fastboot_register("oem help", cmd_help, 1);
-  fastboot_register("oem ssm enable-thinkshield", cmd_ssm_enable_thinkshield,
-                    1);
+  fastboot_register("oem ssm enable-thinkshield", cmd_ssm_enable_thinkshield, 1);
   fastboot_register("oem ssm enable-zerotouch", cmd_ssm_enable_zerotouch, 1);
   fastboot_register("flash:", cmd_flash, 1);
   fastboot_register("erase:", cmd_erase, 1);
