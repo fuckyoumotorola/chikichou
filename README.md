@@ -16,6 +16,7 @@ Minimal payload for bootloader (lk) modification for Moto G24 Power (fogorow)
 - Publishes ```membase```
 - Publishes ```chokichou-version```
 - Hides bootloader orange state warning
+- Hides useless information from screen when is into bootloader mode
 
 ## Build
 ### Arch Linux
