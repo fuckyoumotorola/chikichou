@@ -57,8 +57,7 @@ void early_init() {
   x[1] = 0x4770;
   arch_clean_invalidate_cache_range((uint32_t)0x4c434ea0, 2);
 
-  x = (volatile uint16_t
-           *)0x4c437898; // bypass oem ssm subcommands restrictions
+  x = (volatile uint16_t *)0x4c437898; // bypass oem ssm subcommands restrictions
   x[0] = 0x2001;
   x[1] = 0x4770;
   arch_clean_invalidate_cache_range((uint32_t)0x4c437898, 2);
