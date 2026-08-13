@@ -8,11 +8,11 @@ Payload for bootloader (lk) modification for Moto G24 Power (fogorow)
 - Blocks ```fastboot erase``` on critical partitions
 - Adds ```fastboot oem help```
 - Adds ```fastboot oem is-partition-protected```
-- Adds ```fastboot oem ssm-disable-thinkshield```
-- Adds ```fastboot oem ssm-disable-zerotouch```
+- Adds ```fastboot oem ssm-enable-thinkshield```
+- Adds ```fastboot oem ssm-enable-zerotouch```
 - Adds ```fastboot oem download```
-- Patches ```fastboot oem ssm-enable-thinkshield```
-- Patches ```fastboot oem ssm-enable-zerotouch```
+- Patches ```fastboot oem ssm-disable-thinkshield```
+- Patches ```fastboot oem ssm-disable-zerotouch```
 - Publishes ```membase```
 - Publishes ```chokichou-version```
 - Hides bootloader orange state warning
