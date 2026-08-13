@@ -4,9 +4,18 @@ Payload for bootloader (lk) modification for Moto G24 Power (fogorow)
 ## Features
 - Blocks ```fastboot flash preloader```
 - Blocks ```fastboot flashing lock```
+- Blocks ```fastboot flashing unlock```
 - Blocks ```fastboot erase``` on critical partitions
 - Adds ```fastboot oem help```
-- Publishes ```membase``` and ```chokichou-version```
+- Adds ```fastboot oem is-partition-protected```
+- Adds ```fastboot oem ssm-disable-thinkshield```
+- Adds ```fastboot oem ssm-disable-zerotouch```
+- Adds ```fastboot oem download```
+- Patches ```fastboot oem ssm-enable-thinkshield```
+- Patches ```fastboot oem ssm-enable-zerotouch```
+- Publishes ```membase```
+- Publishes ```chokichou-version```
+- Hides bootloader orange state warning
 
 ## Build
 ### Arch Linux
