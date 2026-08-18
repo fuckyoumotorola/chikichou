@@ -40,6 +40,8 @@ void cmd_help(const char *arg, void *data, unsigned sz) {
   fastboot_info("reboot-bootloader:");
   fastboot_info("reboot-recovery:");
   fastboot_info("set-active:");
+  fastboot_info("flashing lock");
+  fastboot_info("flashing unlock");
 
   fastboot_info("");
   fastboot_info("Available stock OEM commands:");
@@ -126,8 +128,7 @@ void cmd_flashing_unlock(const char *arg, void *data, unsigned sz) {
 }
 
 void cmd_flashing_lock(const char *arg, void *data, unsigned sz) {
-  fastboot_info("To lock the bootloader, you need to flash");
-  fastboot_info("stock firmare first");
+  fastboot_info("To lock the bootloader, you need to flash stock firmare first");
   fastboot_fail("");
 }
 
@@ -188,14 +189,12 @@ void register_commands() {
   fastboot_publish("chikichou-version", VERSION);
 
   fastboot_register("oem help", cmd_help, 1);
-  fastboot_register("oem ssm enable-thinkshield", cmd_ssm_enable_thinkshield,
-                    1);
+  fastboot_register("oem ssm enable-thinkshield", cmd_ssm_enable_thinkshield, 1);
   fastboot_register("oem ssm enable-zerotouch", cmd_ssm_enable_zerotouch, 1);
   fastboot_register("flash:", cmd_flash, 1);
   fastboot_register("erase:", cmd_erase, 1);
   fastboot_register("flashing lock", cmd_flashing_lock, 1);
   fastboot_register("flashing unlock", cmd_flashing_unlock, 1);
   fastboot_register("oem download", cmd_download, 1);
-  fastboot_register("oem is-partition-protected", cmd_is_partition_protected,
-                    1);
+  fastboot_register("oem is-partition-protected", cmd_is_partition_protected, 1);
 }

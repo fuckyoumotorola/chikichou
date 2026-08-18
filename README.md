@@ -26,7 +26,7 @@ Minimal payload for bootloader (lk) modification for Moto G24 Power (fogorow)
     ```
 2. Run build
     ```shell
-    make clean; make
+    make
     ```
 
 # Credits
