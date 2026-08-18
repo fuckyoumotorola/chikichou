@@ -14,7 +14,7 @@ Minimal payload for bootloader (lk) modification for Moto G24 Power (fogorow)
 - Patches ```fastboot oem ssm-disable-thinkshield```
 - Patches ```fastboot oem ssm-disable-zerotouch```
 - Publishes ```membase```
-- Publishes ```chokichou-version```
+- Publishes ```chikichou-version```
 - Hides bootloader orange state warning
 - Hides useless information from screen when is into bootloader mode
 
