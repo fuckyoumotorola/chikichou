@@ -6,63 +6,72 @@ typedef size_t word;
 #define lmask (lsize - 1)
 
 void *malloc(size_t size) {
-    return ((void *(*)(size_t))(0x4c43d1b8 | 1))(size);
+  return ((void *(*)(size_t))(0x4c43d1b8 | 1))(size);
 }
 
-void *memcpy(void *dest, const void *src, size_t count)
-{
-    char *d = (char *)dest;
-    const char *s = (const char *)src;
-    int len;
+void *memcpy(void *dest, const void *src, size_t count) {
+  char *d = (char *)dest;
+  const char *s = (const char *)src;
+  int len;
 
-    if (count == 0 || dest == src)
-        return dest;
-
-    if (((size_t)d | (size_t)s) & lmask) {
-        if ((((size_t)d ^ (size_t)s) & lmask) || (count < lsize))
-            len = count;
-        else
-            len = lsize - ((size_t)d & lmask);
-
-        count -= len;
-        for (; len > 0; len--)
-            *d++ = *s++;
-    }
-    for (len = count / lsize; len > 0; len--) {
-        *(word *)d = *(word *)s;
-        d += lsize;
-        s += lsize;
-    }
-    for (len = count & lmask; len > 0; len--)
-        *d++ = *s++;
-
+  if (count == 0 || dest == src)
     return dest;
+
+  if (((size_t)d | (size_t)s) & lmask) {
+    if ((((size_t)d ^ (size_t)s) & lmask) || (count < lsize))
+      len = count;
+    else
+      len = lsize - ((size_t)d & lmask);
+
+    count -= len;
+    for (; len > 0; len--)
+      *d++ = *s++;
+  }
+  for (len = count / lsize; len > 0; len--) {
+    *(word *)d = *(word *)s;
+    d += lsize;
+    s += lsize;
+  }
+  for (len = count & lmask; len > 0; len--)
+    *d++ = *s++;
+
+  return dest;
 }
 
-void *memset(void *s, int c, size_t count)
-{
-    char *xs = (char *) s;
-    size_t len = (-(size_t)s) & (sizeof(size_t)-1);
-    int cc = c & 0xff;
+int memcmp(const void *cs, const void *ct, size_t count) {
+  const unsigned char *su1, *su2;
+  int res = 0;
 
-    if ( count > len ) {
-        count -= len;
-        cc |= cc << 8;
-        cc |= cc << 16;
+  for (su1 = cs, su2 = ct; 0 < count; ++su1, ++su2, count--) {
+    if ((res = *su1 - *su2) != 0)
+      break;
+  }
+  return res;
+}
 
-        for ( ; len > 0; len-- )
-            *xs++ = c;
+void *memset(void *s, int c, size_t count) {
+  char *xs = (char *)s;
+  size_t len = (-(size_t)s) & (sizeof(size_t) - 1);
+  int cc = c & 0xff;
 
-        for ( len = count/sizeof(size_t); len > 0; len-- ) {
-            *((size_t *)xs) = cc;
-            xs += sizeof(size_t);
-        }
+  if (count > len) {
+    count -= len;
+    cc |= cc << 8;
+    cc |= cc << 16;
 
-        count &= sizeof(size_t)-1;
+    for (; len > 0; len--)
+      *xs++ = c;
+
+    for (len = count / sizeof(size_t); len > 0; len--) {
+      *((size_t *)xs) = cc;
+      xs += sizeof(size_t);
     }
 
-    for ( ; count > 0; count-- )
-        *xs++ = c;
+    count &= sizeof(size_t) - 1;
+  }
 
-    return s;
+  for (; count > 0; count--)
+    *xs++ = c;
+
+  return s;
 }
