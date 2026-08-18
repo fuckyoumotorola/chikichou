@@ -1,0 +1,61 @@
+name: Build ChikiChou LK
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Install system dependencies
+        run: |
+          sudo apt update
+          # Instalamos python-is-python3 para que tu Makefile pueda ejecutar "python scripts/patch_lk.py" sin problemas
+          sudo apt install -y build-essential gcc-arm-none-eabi libnewlib-arm-none-eabi git python3 python-is-python3
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Python dependencies
+        # Añadimos este bloque por si patch_lk.py necesita liblk (como en Kaeru)
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f "requirements.txt" ]; then
+            pip install -r requirements.txt
+          else
+            echo "Instalando liblk por precaución..."
+            pip install liblk || true
+          fi
+
+      - name: Build ChikiChou
+        run: |
+          make clean
+          make
+
+      - name: Check output
+        run: |
+          echo "Contenido del directorio build:"
+          ls -lh build/
+          echo "Contenido del directorio payload/build:"
+          ls -lh payload/build/
+
+      - name: Upload Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: chikichou-fogorow-${{ github.run_number }}
+          name: ChikiChou fogorow build ${{ github.run_number }}
+          # Subimos tanto el binario crudo del payload como la imagen de LK ya parchada
+          files: |
+            build/lk-patched.img
+            payload/build/payload.bin
