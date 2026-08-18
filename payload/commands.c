@@ -185,7 +185,7 @@ void cmd_is_partition_protected(const char *arg, void *data, unsigned sz) {
 
 void register_commands() {
   fastboot_publish("membase", "0x4C400000");
-  fastboot_publish("chokichou-version", VERSION);
+  fastboot_publish("chikichou-version", VERSION);
 
   fastboot_register("oem help", cmd_help, 1);
   fastboot_register("oem ssm enable-thinkshield", cmd_ssm_enable_thinkshield,
