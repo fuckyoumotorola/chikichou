@@ -2,7 +2,7 @@
 Minimal payload for bootloader (lk) modification for Moto G24 Power (fogorow)
 
 ## Features
-- Blocks ```fastboot flash preloader```
+- Blocks ```fastboot flash``` on critical partitions
 - Blocks ```fastboot flashing lock```
 - Blocks ```fastboot flashing unlock```
 - Blocks ```fastboot erase``` on critical partitions
