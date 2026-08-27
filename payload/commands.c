@@ -128,7 +128,8 @@ void cmd_flashing_unlock(const char *arg, void *data, unsigned sz) {
 }
 
 void cmd_flashing_lock(const char *arg, void *data, unsigned sz) {
-  fastboot_info("To lock the bootloader, you need to flash stock firmare first");
+  fastboot_info("To lock the bootloader, you need to");
+  fastboot_info("flash stock firmare first");
   fastboot_fail("");
 }
 
